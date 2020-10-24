@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f8c76a5349c414dc2f68fa0439fc5d5d",
+    "revision": "8a72164bfe7c7d03a48764ea6d6723b7",
     "url": "/endemic-simulation/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/endemic-simulation/static/css/2.220ccb42.chunk.css"
   },
   {
-    "revision": "343030eae583ca84dceb",
+    "revision": "1fa73d497ebcea1bf16f",
     "url": "/endemic-simulation/static/css/main.c2aed115.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/endemic-simulation/static/js/2.b0b55d06.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "343030eae583ca84dceb",
-    "url": "/endemic-simulation/static/js/main.5909c06c.chunk.js"
+    "revision": "1fa73d497ebcea1bf16f",
+    "url": "/endemic-simulation/static/js/main.f6a98ea0.chunk.js"
   },
   {
     "revision": "79454d4972e051128dcd",
