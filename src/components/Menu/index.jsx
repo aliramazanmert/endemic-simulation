@@ -221,7 +221,7 @@ const Menu = ({
             />
           </AddButtonsContainer>
         </Col>
-        <Col span={1}>{/* {`Time: ${time}`} */}</Col>
+        <Col span={1}>{`Time: ${time}`}</Col>
         <Col span={4}>
           <Popover content={endemicPropsMenu} title="Endemic Properties" trigger="click">
             <Button
