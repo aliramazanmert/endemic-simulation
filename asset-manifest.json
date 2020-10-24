@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/endemic-simulation/static/css/main.c2aed115.chunk.css",
+    "main.js": "/endemic-simulation/static/js/main.5909c06c.chunk.js",
+    "main.js.map": "/endemic-simulation/static/js/main.5909c06c.chunk.js.map",
+    "runtime-main.js": "/endemic-simulation/static/js/runtime-main.c50c76e0.js",
+    "runtime-main.js.map": "/endemic-simulation/static/js/runtime-main.c50c76e0.js.map",
+    "static/css/2.220ccb42.chunk.css": "/endemic-simulation/static/css/2.220ccb42.chunk.css",
+    "static/js/2.b0b55d06.chunk.js": "/endemic-simulation/static/js/2.b0b55d06.chunk.js",
+    "static/js/2.b0b55d06.chunk.js.map": "/endemic-simulation/static/js/2.b0b55d06.chunk.js.map",
+    "index.html": "/endemic-simulation/index.html",
+    "precache-manifest.6e77b0d5c2134ca6bff07b70c481f974.js": "/endemic-simulation/precache-manifest.6e77b0d5c2134ca6bff07b70c481f974.js",
+    "service-worker.js": "/endemic-simulation/service-worker.js",
+    "static/css/2.220ccb42.chunk.css.map": "/endemic-simulation/static/css/2.220ccb42.chunk.css.map",
+    "static/css/main.c2aed115.chunk.css.map": "/endemic-simulation/static/css/main.c2aed115.chunk.css.map",
+    "static/js/2.b0b55d06.chunk.js.LICENSE.txt": "/endemic-simulation/static/js/2.b0b55d06.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c50c76e0.js",
+    "static/css/2.220ccb42.chunk.css",
+    "static/js/2.b0b55d06.chunk.js",
+    "static/css/main.c2aed115.chunk.css",
+    "static/js/main.5909c06c.chunk.js"
+  ]
+}
