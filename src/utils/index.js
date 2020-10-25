@@ -31,7 +31,7 @@ export const initializeCells = (socialDistanceRate, maskUsage, quarantineRate) =
       cells[i].push(cell);
     }
   }
-  return cells;
+  return { time: 0, grid: cells };
 };
 
 export const deepCopy = (arr) => {

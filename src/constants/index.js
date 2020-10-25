@@ -5,6 +5,8 @@ export const TIME_TO_RECOVER = 48;
 export const INFECTION_CHANCE_FAR = 0.005;
 export const INFECTION_CHANCE_CLOSE = 0.01;
 
+export const APPLY_VACCINE_DURATION = 48;
+
 export const QUARANTINE_CONDITIONS = [
   [
     [

@@ -12,6 +12,8 @@ import {
   faGlobeAfrica,
   faWrench,
   faClock,
+  faShieldAlt,
+  faSyringe,
 } from "@fortawesome/free-solid-svg-icons";
 import { Button, Popover, Slider, Checkbox, Row, Col } from "antd";
 
@@ -33,6 +35,10 @@ const Menu = ({
   setCloseInfectionChance,
   setFarInfectionChance,
   setInfectionDuration,
+  setPermanentImmunity,
+  setImmunityDuration,
+  setVaccineEnabled,
+  setVaccineTime,
 }) => {
   const [socialDistanceRate, setSocialDistanceRate] = useState(0.5);
   const [maskUsage, setMaskUsage] = useState(0);
@@ -42,6 +48,8 @@ const Menu = ({
   const [playing, setPlaying] = useState(false);
 
   const [deathEnabled, setDeathEnabled] = useState(false);
+  const [permImmunity, setPermImmunity] = useState(true);
+  const [vaccEnabled, setVaccEnabled] = useState(false);
 
   const startSimulation = () => {
     timeout = setInterval(() => {
@@ -99,7 +107,7 @@ const Menu = ({
         <div className="icon-wrapper">
           <FontAwesomeIcon icon={faClock} />
           <Slider
-            marks={{ 48: "48h", 144: "154h" }}
+            marks={{ 48: "48h", 144: "144h" }}
             defaultValue={48}
             min={48}
             max={144}
@@ -140,8 +148,9 @@ const Menu = ({
         </div>
       </SliderContainer>
       <h5>Enable Deaths</h5>
+      <FontAwesomeIcon style={{ marginRight: "5px" }} icon={faSkullCrossbones} />
       <Checkbox
-        value={deathEnabled}
+        checked={deathEnabled}
         onChange={() => {
           setDeathEnabled((prev) => !prev);
           setDeathsEnabled((prev) => !prev);
@@ -163,20 +172,56 @@ const Menu = ({
           </div>
         </SliderContainer>
       </ConditionalInput>
-      {/* <h5>Quarantine Rate</h5>
-      <SliderContainer>
-        <div className="icon-wrapper">
-          <FontAwesomeIcon icon={faRestroom} />
-          <Slider onChange={(val) => setQuarantineRate(val / 100)} max={60} tipFormatter={null} />
-        </div>
-      </SliderContainer>
-      <h5>Mask Usage</h5>
-      <SliderContainer>
-        <div className="icon-wrapper">
-          <FontAwesomeIcon icon={faHeadSideMask} />
-          <Slider onChange={(val) => setMaskUsage(val / 100)} tipFormatter={null} />
-        </div>
-      </SliderContainer> */}
+      <h5>Permanent Immunity</h5>
+      <FontAwesomeIcon style={{ marginRight: "5px" }} icon={faShieldAlt} />
+      <Checkbox
+        checked={permImmunity}
+        onChange={() => {
+          setPermImmunity((prev) => !prev);
+          setPermanentImmunity((prev) => !prev);
+        }}
+      />
+      <ConditionalInput show={!permImmunity}>
+        <h5>Immunity Duration</h5>
+        <SliderContainer>
+          <div className="icon-wrapper">
+            <FontAwesomeIcon icon={faShieldAlt} />
+            <Slider
+              marks={{ 0: "No Immunity", 144: "144h" }}
+              defaultValue={0}
+              max={144}
+              step={6}
+              onAfterChange={(val) => setImmunityDuration(val)}
+              tipFormatter={(val) => `${val} hours`}
+            />
+          </div>
+        </SliderContainer>
+      </ConditionalInput>
+      <h5>Enable Vaccine</h5>
+      <FontAwesomeIcon style={{ marginRight: "5px" }} icon={faSyringe} />
+      <Checkbox
+        checked={vaccEnabled}
+        onChange={() => {
+          setVaccEnabled((prev) => !prev);
+          setVaccineEnabled((prev) => !prev);
+        }}
+      />
+      <ConditionalInput show={vaccEnabled}>
+        <h5>Time When Vaccine Found</h5>
+        <SliderContainer>
+          <div className="icon-wrapper">
+            <FontAwesomeIcon icon={faSyringe} />
+            <Slider
+              marks={{ 8: "Day8", 16: "Day16" }}
+              defaultValue={8}
+              min={8}
+              max={16}
+              onAfterChange={(val) => setVaccineTime(val * 24)}
+              tipFormatter={(val) => `Day ${val}`}
+            />
+          </div>
+        </SliderContainer>
+      </ConditionalInput>
     </div>
   );
 

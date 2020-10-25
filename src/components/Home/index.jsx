@@ -11,6 +11,7 @@ import {
   NUM_COLS,
   NUM_ROWS,
   QUARANTINE_CONDITIONS,
+  APPLY_VACCINE_DURATION,
 } from "../../constants";
 import { deepCopy, initializeCells } from "../../utils";
 
@@ -23,12 +24,31 @@ const Home = () => {
   const [closeInfectionChance, setCloseInfectionChance] = useState(INFECTION_CHANCE_CLOSE);
   const [farInfectionChance, setFarInfectionChance] = useState(INFECTION_CHANCE_FAR);
   const [infectionDuration, setInfectionDuration] = useState(TIME_TO_RECOVER);
+  const [permanentImmunity, setPermanentImmunity] = useState(true);
+  const [immunityDuration, setImmunityDuration] = useState(0);
+  const [vaccineEnabled, setVaccineEnabled] = useState(false);
+  const [vaccineTime, setVaccineTime] = useState(1 * 24);
+
+  const temporaryImmunity = !permanentImmunity && immunityDuration !== 0;
 
   const calcNextState = () => {
-    setCells((prevCells) => {
-      let tempCells = deepCopy(prevCells);
+    setCells((prev) => {
+      const prevCells = prev.grid;
+      let tempCells = deepCopy(prev.grid);
       tempCells.forEach((row, i) => {
         return row.forEach((_, j) => {
+          if (vaccineEnabled && vaccineTime <= prev.time) {
+            if (tempCells[i][j].state === "normal" || tempCells[i][j].state === "immune") {
+              if (Math.random() < 1 / APPLY_VACCINE_DURATION) {
+                tempCells[i][j].state = "vaccined";
+              }
+            }
+          }
+          if (temporaryImmunity && tempCells[i][j].state === "immune") {
+            if (--tempCells[i][j].timeLeftToLoseImmunity === 0) {
+              tempCells[i][j].state = "normal";
+            }
+          }
           if (prevCells[i][j].state === "infected") {
             if (deathsEnabled) {
               if (deathChance !== 0 && Math.random() < deathChance / infectionDuration) {
@@ -37,7 +57,14 @@ const Home = () => {
               }
             }
             if (--tempCells[i][j].timeLeftToRecover === 0) {
-              tempCells[i][j].state = "immune";
+              if (permanentImmunity) {
+                tempCells[i][j].state = "immune";
+              } else if (immunityDuration === 0) {
+                tempCells[i][j].state = "normal";
+              } else {
+                tempCells[i][j].state = "immune";
+                tempCells[i][j].timeLeftToLoseImmunity = immunityDuration;
+              }
             }
 
             for (let x = i - 2; x <= i + 2; x++) {
@@ -75,7 +102,7 @@ const Home = () => {
           }
         });
       });
-      return tempCells;
+      return { time: prev.time + 1, grid: tempCells };
     });
   };
 
@@ -91,9 +118,13 @@ const Home = () => {
         setCloseInfectionChance={setCloseInfectionChance}
         setFarInfectionChance={setFarInfectionChance}
         setInfectionDuration={setInfectionDuration}
+        setPermanentImmunity={setPermanentImmunity}
+        setImmunityDuration={setImmunityDuration}
+        setVaccineEnabled={setVaccineEnabled}
+        setVaccineTime={setVaccineTime}
       />
       <Container>
-        {cells.map((row, i) => (
+        {cells.grid.map((row, i) => (
           <Row key={i}>
             {row.map((cell, j) => (
               <Col key={j}>

@@ -8,19 +8,19 @@ const Cell = (props) => {
   //console.log(props.i * 60 + props.j);
   const addVirus = (i, j) => {
     props.setCells((prevCells) => {
-      let rows = [...prevCells];
+      let rows = [...prevCells.grid];
       let row = [...rows[i]];
       let cell = { ...row[j] };
       cell.state = "infected";
       cell.timeLeftToRecover = props.infectionDuration;
       row[j] = cell;
       rows[i] = row;
-      return rows;
+      return { ...prevCells, grid: rows };
     });
   };
   const addQuarantineBorder = (i, j) => {
     props.setCells((prevCells) => {
-      let rows = [...prevCells];
+      let rows = [...prevCells.grid];
       let row = [...rows[i]];
       let cell = { ...row[j] };
       let neighborRow;
@@ -50,18 +50,18 @@ const Cell = (props) => {
       cell[hoverPos] = true;
       row[j] = cell;
       rows[i] = row;
-      return rows;
+      return { ...prevCells, grid: rows };
     });
   };
   const addMask = (i, j) => {
     props.setCells((prevCells) => {
-      let rows = [...prevCells];
+      let rows = [...prevCells.grid];
       let row = [...rows[i]];
       let cell = { ...row[j] };
       cell.mask = true;
       row[j] = cell;
       rows[i] = row;
-      return rows;
+      return { ...prevCells, grid: rows };
     });
   };
 

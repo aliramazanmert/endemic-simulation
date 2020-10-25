@@ -5,22 +5,22 @@ export const Container = styled.div`
   width: 23px;
   border-right: ${(props) => (props.right ? ` solid 3px black` : ` solid 1px lightskyblue`)};
   border-top: ${(props) => (props.top ? ` solid 3px black` : ` solid 1px lightskyblue`)};
+  background-size: cover;
+
+  ${(props) => (props.mask ? `background-image: url("mask.png");` : ``)}
+
   ${(props) =>
     props.condition === "infected"
       ? "background-color: crimson;"
       : props.condition === "immune"
-      ? "background-color: green	;"
+      ? "background-color: green;"
       : props.condition === "normal"
-      ? "background-color: moccasin	;"
+      ? "background-color: moccasin;"
       : props.condition === "dead"
-      ? "background-color: dimgray	;"
+      ? "background-color: dimgray;"
+      : props.condition === "vaccined"
+      ? `background-color: royalblue;background-image: url("syringe.png");`
       : "background-color: rgb(245,245,245)	;"}
-
-  ${(props) =>
-    props.mask
-      ? `background-image: url("mask.webp");
-        background-size: cover;`
-      : ``}
 
   transition: background-color linear 0.25s;
 
@@ -30,7 +30,7 @@ export const Container = styled.div`
         ? `
         border-${props.hoverPos}: solid 3px black;`
         : props.action === "mask"
-        ? `background-image: url("mask.webp");
+        ? `background-image: url("mask.png");
         background-size: cover;`
         : `transform: scale(1.5, 1.5);
           border: solid 1px lightskyblue;
