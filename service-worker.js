@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/endemic-simulation/precache-manifest.80737e9231346b0d2a6b0510c8598f61.js"
+  "/endemic-simulation/precache-manifest.0b22755852b1f232b8f7b6b0beab304e.js"
 );
 
 self.addEventListener('message', (event) => {
