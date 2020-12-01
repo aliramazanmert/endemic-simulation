@@ -29,5 +29,12 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: touch actions.txt
+          script: |
+            cd app
+            git fetch origin frontend
+            git checkout origin/frontend frontend
+            cd frontend
+            docker build -t akademise .
+            docker rm -f akademise-container
+            docker run -d -p 80:80 --name akademise-container akademise
  
